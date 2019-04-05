@@ -1,16 +1,23 @@
 #!/bin/bash
 set -e
 
-if [ ! -f /etc/lemp2_configured ]; then
+if [ ! -f /etc/installer_completed ]; then
 
 echo "**************************************************************"
 echo "*                                                            *"
-echo "*              This is a fresh installation                  *"
+echo "*                 Cylo Base Installer 1.0                    *"
+echo "*                     Installing Apps:                       *"
 echo "*                                                            *"
 echo "**************************************************************"
+echo "Default base image applications"
+if [ "${INSTALL_NGINXPHP}" = true ]; then echo "Nginx & PHP-FPM 7"; fi
+if [ "${INSTALL_MYSQL}" = true ]; then echo "MySQL Server"; fi
+echo " "
+echo "**************************************************************"
+echo " "
 
     # Create Directories
-    echo "Creating config directory"
+    echo "Creating default directories"
     mkdir -p /home/appbox/config
 
     if [ "${INSTALL_NGINXPHP}" = true ]; then
@@ -39,8 +46,18 @@ echo "**************************************************************"
     echo "Cleaning up"
     rm -fr /sources
 
+    apt autoremove -y
     apt-get clean
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+echo "                                   .''.       "
+echo "       .''.      .        *''*    :_\/_:     . "
+echo "      :_\/_:   _\(/_  .:.*_\/_*   : /\ :  .'.:.'."
+echo "  .''.: /\ :   ./)\   ':'* /\ * :  '..'.  -=:o:=-"
+echo " :_\/_:'.:::.    ' *''*    * '.\'/.' _\(/_'.':'.'"
+echo " : /\ : :::::     *_\/_*     -= o =-  /)\    '  *"
+echo "  '..'  ':::'     * /\ *     .'/.\'.   '"
+echo "      *            *..*         :"
 
     echo "Finishing Install"
     # Finish Install
@@ -50,6 +67,6 @@ echo "**************************************************************"
             sleep 5
         done
     fi
-    touch /etc/lemp2_configured
+    touch /etc/installer_completed
 
 fi

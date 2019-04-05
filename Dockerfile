@@ -16,8 +16,8 @@ ADD /scripts /scripts
 RUN chmod -R +x /scripts
 
 RUN mkdir -p /etc/my_init.d
-RUN mv /scripts/20_lemp.sh /etc/my_init.d/20_lemp.sh
-RUN chmod -R +x /etc/my_init.d/20_lemp.sh
+RUN mv /scripts/20_installer.sh /etc/my_init.d/20_installer.sh
+RUN chmod -R +x /etc/my_init.d/20_installer.sh
 
 ADD /sources /sources
 EXPOSE 80 3306
