@@ -12,6 +12,7 @@ echo "**************************************************************"
 echo "Default base image applications"
 if [ "${INSTALL_NGINXPHP}" = true ]; then echo "Nginx & PHP-FPM 7"; fi
 if [ "${INSTALL_MYSQL}" = true ]; then echo "MySQL Server"; fi
+if [ "${INSTALL_MONGODB}" = true ]; then echo "MongoDB Server"; fi
 echo " "
 echo "**************************************************************"
 echo " "
@@ -21,21 +22,27 @@ echo " "
     mkdir -p /home/appbox/config
 
     if [ "${INSTALL_NGINXPHP}" = true ]; then
-        # Install NGINX & PHP-FPM 7
         echo "Installing NGINX & PHP-FPM 7"
         /bin/sh /scripts/nginx_php7.sh
     else
-        echo "NGINX & PHP not required, removing installer"
+        echo "Not required, removing installer"
         rm -fr /scripts/nginx_php7.sh
     fi
 
     if [ "${INSTALL_MYSQL}" = true ]; then
-        # Install MySQL
         echo "Installing MySQL"
         /bin/sh /scripts/mysql.sh
     else
-        echo "MySQL not required, removing installer"
+        echo "Not required, removing installer"
         rm -f /scripts/mysql.sh
+    fi
+
+    if [ "${INSTALL_MONGODB}" = true ]; then
+        echo "Installing MongoDB"
+        /bin/sh /scripts/mongodb.sh
+    else
+        echo "Not required, removing installer"
+        rm -f /scripts/mongodb.sh
     fi
 
     # Set Permissions

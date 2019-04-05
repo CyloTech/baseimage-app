@@ -5,7 +5,8 @@ ENV HOME=/home/appbox \
     MYSQL_ROOT_PASSWORD=mysqlr00t \
     APEX_CALLBACK=false \
     INSTALL_MYSQL=false \
-    INSTALL_NGINXPHP=false
+    INSTALL_NGINXPHP=false \
+    INSTALL_MONGODB=false
 
 RUN apt update
 RUN apt install -y git --no-install-recommends
