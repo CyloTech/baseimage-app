@@ -8,8 +8,7 @@ ENV HOME=/home/appbox \
     INSTALL_NGINXPHP=false
 
 RUN apt update
-RUN apt install -y wget \
-                   git
+RUN apt install -y git --no-install-recommends
 
 RUN adduser --system --disabled-password --home ${HOME} --shell /sbin/nologin --group --uid 1000 appbox
 
@@ -30,6 +29,7 @@ RUN groupmod -g 9999 nogroup && \
     usermod -g 9999 _apt
 
 # Clean up APT when done.
+RUN apt autoremove -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Use baseimage-docker's init system.
