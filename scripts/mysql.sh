@@ -78,7 +78,6 @@ echo "Setting up MySQL Daemon"
 mkdir -p /etc/service/mysql
 cat << EOF >> /etc/service/mysql/run
 #!/bin/sh
-exec rm -fr /run/mysqld/mysqld*
 exec /usr/sbin/mysqld --defaults-file=/home/appbox/config/mysql/mysqld.cnf --verbose=0 --socket=/run/mysqld/mysqld.sock
 EOF
 chmod +x /etc/service/mysql/run
