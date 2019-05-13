@@ -20,10 +20,12 @@ echo " "
     # Create Directories
     echo "Creating default directories"
     mkdir -p /home/appbox/config
+    mkdir -p /home/appbox/logs
 
     if [ "${INSTALL_NGINXPHP}" = true ]; then
         echo "Installing NGINX & PHP-FPM 7"
         /bin/sh /scripts/nginx_php7.sh
+        chown -R appbox:appbox /home/appbox/public_html
     else
         echo "Not required, removing installer"
         rm -fr /scripts/nginx_php7.sh
@@ -32,6 +34,7 @@ echo " "
     if [ "${INSTALL_MYSQL}" = true ]; then
         echo "Installing MySQL"
         /bin/sh /scripts/mysql.sh
+        chown -R appbox:appbox /home/appbox/mysql
     else
         echo "Not required, removing installer"
         rm -f /scripts/mysql.sh
@@ -47,7 +50,8 @@ echo " "
 
     # Set Permissions
     echo "Setting Permissions on homedir"
-    chown -R appbox:appbox /home/appbox
+    chown -R appbox:appbox /home/appbox/config
+    chown -R appbox:appbox /home/appbox/logs
 
     # Clean Up
     echo "Cleaning up"
